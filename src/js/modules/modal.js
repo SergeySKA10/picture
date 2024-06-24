@@ -1,10 +1,13 @@
 'use strict';
 const modal = () => {
-    function bindModal(triggerSelector, modalSelector, closeSelector, closeClickOverlay = true) {
+    const scroll = calcScroll();
+    let btnPressed,
+        presentRemove;
+    
+    function bindModal(triggerSelector, modalSelector, closeSelector, destroy = false) {
         const trigger = document.querySelectorAll(triggerSelector),
               modal = document.querySelector(modalSelector),
-              close = document.querySelector(closeSelector),
-              scroll = calcScroll();
+              close = document.querySelector(closeSelector);
 
         trigger.forEach(elem => {
             elem.addEventListener('click', (e) => {
@@ -12,59 +15,37 @@ const modal = () => {
                     e.preventDefault();
                 }
 
-                if (triggerSelector == '.popup_calc_button') {
-                    const inputs = document.querySelectorAll('.popup_calc input');
-                    let countInputValue = 0;
-                    for (let i = 0; i < inputs.length; i++) {
-                        if (inputs[i].value) {
-                            countInputValue++;
-                            inputs[i].style.border = '';
-                        } else inputs[i].style.border = '1px solid red';
-                    }
-                    if (countInputValue === inputs.length)  {
-                            inputs.forEach(item => item.style.border = '');
-                            closeModal();
-                            openModal(modalSelector, scroll);
-                    }     
+                btnPressed = true;
 
-                } else if (triggerSelector == '.popup_calc_profile_button') {
-                    const inputs = document.querySelectorAll('.checkbox');
-                    let countInputValue = 0;
-                    for (let i = 0; i < inputs.length; i++) {
-                        if (inputs[i].checked) {
-                            countInputValue++;
-                            inputs[i].parentNode.style.border = '';
-                        } else inputs[i].parentNode.style.border = '1px solid red';
-                    }
-                    if (countInputValue > 0)  {
-                        inputs.forEach(item => {
-                            item.parentNode.style.border = '';
-                            item.checked = false;
-                        });
-                        closeModal();
-                        openModal(modalSelector, scroll);
-                    }
+                if (destroy) {
+                    elem.remove();
+                    presentRemove = true;
                 } else {
-                    closeModal();
-                    openModal(modalSelector, scroll);
+                    if (!presentRemove) calcMarginRight('.fixed-gift', true);
                 }
+
+                closeModal();
+                openModal(modalSelector, scroll);
             });
         });
 
         modal.addEventListener('click', (e) => {
-            if (e.target === modal && closeClickOverlay) {
+            if (e.target === modal) {
                 closeModal(scroll);
+                if (!presentRemove) calcMarginRight('.fixed-gift');
             }
         });
 
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Escape') {
                 closeModal(scroll);
+                if (!presentRemove) calcMarginRight('.fixed-gift');
             }
         });
 
         close.addEventListener('click', () => {
             closeModal(scroll);
+            if (!presentRemove) calcMarginRight('.fixed-gift');
         });  
     }
 
@@ -81,9 +62,9 @@ const modal = () => {
         }
     }
     
-    function openModal(selector, scroll) {
+    function openModal(selector, scroll, display = 'block') {
         const modal = document.querySelector(selector);
-        modal.style.display = 'block';
+        modal.style.display = display;
         document.body.style.overflow = 'hidden';
     
         if (scroll) {
@@ -124,10 +105,32 @@ const modal = () => {
         return scrollWidth;
     }
 
+    function showModalByScroll(selector) {
+        window.addEventListener('scroll', () => {
+            if (!btnPressed && 
+                window.scrollY + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+                
+                document.querySelector(selector).click();
+            }
+        });
+    }
+
+    function calcMarginRight(selector, bool = false) {
+        const elem = document.querySelector(selector),
+              marginRight = +getComputedStyle(elem).right.replace(/px/, '');
+        if (bool) {
+            elem.style.right = `${marginRight + scroll}px`;
+        } else {
+            elem.style.right = `${marginRight - scroll}px`;
+        }
+    }
+
     bindModal('.button-design', '.popup-design', '.popup-design .popup-close');
     bindModal('.button-consultation', '.popup-consultation', '.popup-consultation .popup-close');
+    bindModal('.fixed-gift', '.popup-gift', '.popup-gift .popup-close', true);
 
-    showModalByTime('.popup-consultation', 6000, scroll);
+    showModalByTime('.popup-consultation', 60000, scroll);
+    showModalByScroll('.fixed-gift');
     
 }
 
