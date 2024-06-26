@@ -54,6 +54,7 @@ const modal = () => {
         
         windows.forEach(item => {
             item.style.display = 'none';
+            item.classList.add('animated', 'fadeIn');
         });
         document.body.style.overflow = '';
     
