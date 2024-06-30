@@ -1,4 +1,18 @@
 'use strict';
+function closeModal(scroll) {
+    const windows = document.querySelectorAll('[data-modal]');
+    
+    windows.forEach(item => {
+        item.style.display = 'none';
+        item.classList.add('animated', 'fadeIn');
+    });
+    document.body.style.overflow = '';
+
+    if (scroll) {
+        document.body.style.marginRight = '0px';
+    }
+}
+
 const modal = () => {
     const scroll = calcScroll();
     let btnPressed,
@@ -49,19 +63,7 @@ const modal = () => {
         });  
     }
 
-    function closeModal(scroll) {
-        const windows = document.querySelectorAll('[data-modal]');
-        
-        windows.forEach(item => {
-            item.style.display = 'none';
-            item.classList.add('animated', 'fadeIn');
-        });
-        document.body.style.overflow = '';
-    
-        if (scroll) {
-            document.body.style.marginRight = '0px';
-        }
-    }
+
     
     function openModal(selector, scroll, display = 'block') {
         const modal = document.querySelector(selector);
@@ -85,6 +87,7 @@ const modal = () => {
             
             if (!display) {
                 openModal(selector, scroll);
+                calcMarginRight('.fixed-gift', true);
             } 
         }, time);
     }
@@ -119,6 +122,7 @@ const modal = () => {
     function calcMarginRight(selector, bool = false) {
         const elem = document.querySelector(selector),
               marginRight = +getComputedStyle(elem).right.replace(/px/, '');
+
         if (bool) {
             elem.style.right = `${marginRight + scroll}px`;
         } else {

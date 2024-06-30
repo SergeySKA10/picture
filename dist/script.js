@@ -2,6 +2,59 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/js/modules/forms.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/forms.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+
+
+const forms = () => {
+  const forms = document.querySelectorAll('form'),
+    inputs = document.querySelectorAll('input'),
+    message = {
+      loading: 'Загрузка',
+      fail: 'Произошла ошибка',
+      complite: 'Спасибо! Скоро с Вами свяжется наш художник'
+    };
+  const postData = async (url, data) => {
+    const response = await fetch(url, {
+      method: "POST",
+      body: data
+    });
+    if (!response.ok) {
+      throw new Error(`Could not fetch: ${url}, status: ${response.status}`);
+    }
+    return await response.text();
+  };
+  const clearInputs = () => {
+    inputs.forEach(input => {
+      input.value = '';
+    });
+  };
+  forms.forEach(form => {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      postData('assets/server.php', formData).then(data => {
+        console.log(data);
+      }).catch(error => {
+        console.error(error);
+      }).finally(() => {
+        clearInputs();
+      });
+    });
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (forms);
+
+/***/ }),
+
 /***/ "./src/js/modules/modal.js":
 /*!*********************************!*\
   !*** ./src/js/modules/modal.js ***!
@@ -263,6 +316,8 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
 /* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+
 
 
 
@@ -271,6 +326,7 @@ window.addEventListener('DOMContentLoaded', () => {
   (0,_modules_modal__WEBPACK_IMPORTED_MODULE_0__["default"])();
   (0,_modules_slider__WEBPACK_IMPORTED_MODULE_1__["default"])('.feedback-slider-item', 5000, 'gorisontal', '.main-next-btn', '.main-prev-btn');
   (0,_modules_slider__WEBPACK_IMPORTED_MODULE_1__["default"])('.main-slider-item', 5000, 'vertical');
+  (0,_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])();
 });
 /******/ })()
 ;
