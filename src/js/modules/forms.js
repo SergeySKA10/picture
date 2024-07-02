@@ -37,18 +37,35 @@ const forms = () => {
         })
     }
 
+    const fileTypes = ["image/jpeg", "image/pjpeg", "image/png"];
+
+    function validFileType(file) {
+        for (let i = 0; i < fileTypes.length; i++) {
+            if (file.type === fileTypes[i]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     upload.forEach(item => {
         item.addEventListener('input', () => {
-            console.log(item.files);
-            let dots;
-            const arr = item.files[0].name.split('.');
-            
-            arr[0].length > 7 ? dots = '...' : dots = '.';
+           
+            if (validFileType(item.files[0])) {
+                let dots;
+                const arr = item.files[0].name.split('.');
+                
+                arr[0].length > 7 ? dots = '...' : dots = '.';
 
-            const name = `${arr[0].substring(0, 7)}${dots}${arr[1]}`;
+                const name = `${arr[0].substring(0, 7)}${dots}${arr[1]}`;
 
-            item.previousElementSibling.textContent = name;
-
+                item.previousElementSibling.textContent = name;
+                
+            } else {
+                item.value = '';
+                console.log(item.files);
+            }
         });
     })
     
