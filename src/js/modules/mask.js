@@ -20,6 +20,8 @@ const mask = (selector) => {
             if (this.value.length == 2) {
                 this.value = '';
             }
+        } else if (event.type === 'click') {
+            setCursorPosition(2, this);
         } else {
             setCursorPosition(this.value.length, this);
         }
@@ -27,7 +29,7 @@ const mask = (selector) => {
 
     let setCursorPosition = (pos, elem) => {
         elem.focus();
-
+ 
         if (elem.setSelectionRange) {
             elem.setSelectionRange(pos, pos);
         } else if (elem.createTextRange) {
@@ -37,12 +39,13 @@ const mask = (selector) => {
             range.moveEnd('character', pos);
             range.moveStart('character', pos);
             range.select();
-        }
+        }        
     }
 
     const inputs = document.querySelectorAll(selector);
-    
+
     inputs.forEach(input => {
+        input.addEventListener('click', createMask);
         input.addEventListener('input', createMask);
         input.addEventListener('focus', createMask);
         input.addEventListener('blur', createMask);

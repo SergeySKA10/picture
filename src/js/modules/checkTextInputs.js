@@ -9,6 +9,12 @@ const checkTextInputs = (selector) => {
                 e.preventDefault();
             }
         });
+
+        input.addEventListener('input', () => {
+            if (input.value.match(/[^а-яё 0-9 . !]/ig)) {
+                input.value = '';
+            }
+        });
     })
 }
 

@@ -37,7 +37,7 @@ const forms = () => {
         })
     }
 
-    const fileTypes = ["image/jpeg", "image/pjpeg", "image/png"];
+    const fileTypes = ["image/jpeg", "image/jpg", "image/png"];
 
     function validFileType(file) {
         for (let i = 0; i < fileTypes.length; i++) {
@@ -61,10 +61,34 @@ const forms = () => {
                 const name = `${arr[0].substring(0, 7)}${dots}${arr[1]}`;
 
                 item.previousElementSibling.textContent = name;
+
+                if (item.closest('.calc-form')) {
+                    const imgMini = document.querySelector('.img-canvas img'),
+                          width = getComputedStyle(imgMini).width,
+                          height = getComputedStyle(imgMini).height;
+
+                    imgMini.style.width = width;
+                    imgMini.style.height = height;
+                    imgMini.classList.add('animated', 'fadeIn');
+                    imgMini.setAttribute('src', window.URL.createObjectURL(item.files[0]));         
+                }
                 
             } else {
                 item.value = '';
-                console.log(item.files);
+
+                if (item.closest('.calc-form')) {
+                    item.previousElementSibling.textContent = 'Изображение должно иметь расширение jpeg, jpg, png';
+                    item.previousElementSibling.style.color = 'red';
+                } else {
+                    item.previousElementSibling.textContent = 'Неверный формат';
+                    item.previousElementSibling.style.color = 'red';
+                }
+                
+
+                setTimeout(() => {
+                    item.previousElementSibling.textContent = 'Файл не выбран';
+                    item.previousElementSibling.style.color = '';
+                }, 4000);
             }
         });
     })

@@ -6,6 +6,7 @@ import forms from "./modules/forms";
 import mask from "./modules/mask";
 import checkTextInputs from "./modules/checkTextInputs";
 import showMoreStyle from "./modules/showMoreStyle";
+import checkEmailInputs from "./modules/checkEmailInputs";
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -18,4 +19,5 @@ window.addEventListener('DOMContentLoaded', () => {
     checkTextInputs('[name="name"]');
     checkTextInputs('[name="message"]');
     showMoreStyle('.button-styles', '.styles-2');
+    checkEmailInputs('[name="email"]');
 });
