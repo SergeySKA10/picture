@@ -7,6 +7,7 @@ import mask from "./modules/mask";
 import checkTextInputs from "./modules/checkTextInputs";
 import showMoreStyle from "./modules/showMoreStyle";
 import checkEmailInputs from "./modules/checkEmailInputs";
+import calc from "./modules/calc";
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -18,6 +19,7 @@ window.addEventListener('DOMContentLoaded', () => {
     mask('[name="phone"]');
     checkTextInputs('[name="name"]');
     checkTextInputs('[name="message"]');
-    showMoreStyle('.button-styles', '.styles-2');
+    showMoreStyle('.button-styles', '#styles .row');
     checkEmailInputs('[name="email"]');
+    calc('#size', '#material', '#options', '.promocode', '.calc-price');
 });

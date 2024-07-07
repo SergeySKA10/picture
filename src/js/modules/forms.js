@@ -1,5 +1,7 @@
 'use strict';
 
+import { postData } from "../services/postForms";
+
 const forms = () => {
     const forms = document.querySelectorAll('form'),
           upload = document.querySelectorAll('[name = "upload"]'),
@@ -16,19 +18,6 @@ const forms = () => {
             err: 'assets/img/fail.png'
           };
     
-    const postData = async (url, data) => {
-        const response = await fetch(url, {
-            method: "POST",
-            body: data
-        });
-
-        if (!response.ok) {
-            throw new Error(`Could not fetch: ${url}, status: ${response.status}`);
-        }
-
-        return await response.text();
-    }
-
     const clearInputs = (form) => {
         form.reset();
 
