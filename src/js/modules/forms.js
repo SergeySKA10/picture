@@ -58,6 +58,7 @@ const forms = () => {
 
                     imgMini.style.width = width;
                     imgMini.style.height = height;
+                    imgMini.style.objectFit = 'contain';
                     imgMini.classList.add('animated', 'fadeIn');
                     imgMini.setAttribute('src', window.URL.createObjectURL(item.files[0]));         
                 }

@@ -8,6 +8,9 @@ import checkTextInputs from "./modules/checkTextInputs";
 import showMoreStyle from "./modules/showMoreStyle";
 import checkEmailInputs from "./modules/checkEmailInputs";
 import calc from "./modules/calc";
+import filter from "./modules/filter";
+import pictureSize from "./modules/pictureSize";
+import accordion from "./modules/accordion";
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -22,4 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
     showMoreStyle('.button-styles', '#styles .row');
     checkEmailInputs('[name="email"]');
     calc('#size', '#material', '#options', '.promocode', '.calc-price');
+    filter();
+    pictureSize();
+    accordion('.often-questions .accordion-heading');
 });
