@@ -130,6 +130,9 @@ h4 {
   padding: 0;
   margin: 0;
   list-style: none;
+  :hover {
+    background-color:#c51abb;
+  }
 }
 .header-menu-sub {
   display: none;
@@ -142,6 +145,9 @@ h4 {
 }
 .header-menu .header-menu-sub li {
   display: block;
+  :hover {
+    background-color: transparent;
+  }
 }
 .header-menu .header-menu-sub li a:after {
   display: none;
@@ -217,22 +223,26 @@ h4 {
   font-size: 1em;
   /* example */
 
-  height: 4em;
+  min-height: 4em;
   /* example */
 
   line-height: 2em /* the same as height */
 ;
 }
 .main .file_upload > button {
-  float: right;
-  width: 8em;
+  /* float: right; */
+  /* width: 8em; */
   /* example */
-
   height: 100%;
+  display: block;
+  margin: 0 auto;
+  /* height: 65px; */
+  width: 235px;
 }
 .main .file_upload > div {
-  padding-left: 1em;
+  /* padding-left: 1em; */
   /* example */
+  text-align: center;
 
 }
 .main .file_upload input[type=file] {
@@ -552,22 +562,25 @@ h4 {
   font-size: 1em;
   /* example */
 
-  height: 4em;
+  /* height: 4em; */
   /* example */
 
   line-height: 2em /* the same as height */
 ;
 }
 .calc .file_upload > button {
-  float: right;
-  width: 8em;
+  /* float: right;
+  width: 8em; */
   /* example */
+  display: block;
+  margin-left: 4rem;
 
   height: 100%;
 }
 .calc .file_upload > div {
-  padding-left: 1em /* example */
-;
+  padding-left: 1em /* example */;
+  margin-top: 10px;
+  margin-left: 4rem;
 }
 .calc .file_upload input[type=file] {
   position: absolute;
@@ -1162,15 +1175,15 @@ h4 {
   font-size: 1em;
   /* example */
 
-  height: 4em;
+  min-height: 4em;
   /* example */
 
   line-height: 2em /* the same as height */
 ;
 }
 .popup-design .file_upload > button {
-  float: right;
-  width: 8em;
+  /* float: right;
+  width: 8em; */
   /* example */
 
   height: 100%;
@@ -1277,6 +1290,19 @@ h4 {
   text-align: center;
   margin: 0 auto;
   color: rgba(178, 80, 188, 0.8);
+}
+.pageup {
+  opacity: 0;
+  width: 26px ;
+  height: 26px;
+  position: fixed;
+  bottom: 100px;
+  right: 5%;
+  z-index: 30;
+  background-color: rgba(178, 80, 188, 0.8);
+  cursor: pointer;
+  transition: 1s all;
+  border: 2px solid rgba(178, 80, 188, 0.8);
 }
 @media (max-width: 1399px) {
   .paints {

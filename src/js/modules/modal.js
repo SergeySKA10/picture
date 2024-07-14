@@ -1,17 +1,4 @@
 'use strict';
-function closeModal(scroll) {
-    const windows = document.querySelectorAll('[data-modal]');
-    
-    windows.forEach(item => {
-        item.style.display = 'none';
-        item.classList.add('animated', 'fadeIn');
-    });
-    document.body.style.overflow = '';
-
-    if (scroll) {
-        document.body.style.marginRight = '0px';
-    }
-}
 
 const modal = () => {
     const scroll = calcScroll();
@@ -63,7 +50,19 @@ const modal = () => {
         });  
     }
 
-
+    function closeModal(scroll) {
+        const windows = document.querySelectorAll('[data-modal]');
+        
+        windows.forEach(item => {
+            item.style.display = 'none';
+            item.classList.add('animated', 'fadeIn');
+        });
+        document.body.style.overflow = '';
+    
+        if (scroll) {
+            document.body.style.marginRight = '0px';
+        }
+    }
     
     function openModal(selector, scroll, display = 'block') {
         const modal = document.querySelector(selector);
@@ -75,6 +74,8 @@ const modal = () => {
         }
     }
     
+    // показ модального окна через определенное время
+
     function showModalByTime(selector, time, scroll) {
         setTimeout(() => {
             let display;
@@ -87,11 +88,16 @@ const modal = () => {
             
             if (!display) {
                 openModal(selector, scroll);
-                calcMarginRight('.fixed-gift', true);
+                
+                if (document.querySelector('.fixed-gift')) {
+                    calcMarginRight('.fixed-gift', true);
+                }  
             } 
         }, time);
     }
     
+    // расчет отсупа (скролла) справа
+
     function calcScroll() {
         let div = document.createElement('div');
         div.style.width = '50px';
@@ -109,6 +115,8 @@ const modal = () => {
         return scrollWidth;
     }
 
+    // показ окна при прокрутке до конца
+
     function showModalByScroll(selector) {
         window.addEventListener('scroll', () => {
             if (!btnPressed && 
@@ -118,6 +126,8 @@ const modal = () => {
             }
         });
     }
+
+    // расчет отсупа справа для фиксированных элементов
 
     function calcMarginRight(selector, bool = false) {
         const elem = document.querySelector(selector),

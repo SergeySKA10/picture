@@ -10,7 +10,7 @@
 </head>
 <body>
 	<img class="fixed-gift wow pulse infinite" src=assets/img/gift.png alt>
-	<header class=header>
+	<header class=header id="up">
 		<div class=container>
 			<div class="col-md-2 col-sm-3 col-xs-6">
 				<button class=burger>
@@ -84,8 +84,8 @@
 				<div class="col-md-3 col-md-offset-3 col-sm-offset-0 col-sm-4 hidden-xs">
 					<div class=file_upload>
 						<button type=button>Загрузить фотографию</button>
-						<div>Файл не выбран</div>
-						<input type=file name=upload>
+						<div>Файл не выбран. Загрузите или перетащите файл сюда</div>
+						<input type=file name=upload accept=".jpg, .jpeg, .png">
 					</div>
 					<p class=email>E-mail: <a href=mailto:info@kartiny.art>info@kartiny.art</a></p>
 				</div>
@@ -231,12 +231,14 @@
 			<h2>Рассчитайте стоимость и получите скидку 30%</h2>
 			<div class=row>
 				<div class="col-md-4 col-offset-1">
-					<form class=form action=# method=POST enctype=multipart/form-data>
+					<form class="form calc-form" action=# method=POST enctype=multipart/form-data>
 						<h4>Загрузите свое фото</h4>
 						<div class=file_upload>
 							<button type=button>Загрузить фотографию</button>
-							<div>Файл не выбран</div>
-							<input type=file name=upload>
+							<div>Файл не выбран. Загрузите или перетащите файл сюда</div>
+							<input  type=file
+									name=upload
+									accept=".jpg, .jpeg, .png">
 						</div>
 						<select id=size>
 							<option >Выберите размер картины</option>
@@ -262,7 +264,7 @@
 						<button class="button button-order">Быстрый заказ</button>
 					</form>
 				</div>
-				<div class="col-md-4 col-md-offset-2 hidden-sm hidden-xs">
+				<div class="col-md-4 col-md-offset-2 hidden-sm hidden-xs img-canvas">
 					<img src=assets/img/calc-1.png alt>
 					<p class=calc-text>Пропорциональный размер изображения рассчитывается автоматически. Если Вы хотите кадрировать изображение или просто узнать стоимость желаемого размера картины, снимите галочку с поля «Пропорциональный»</p>
 				</div>
@@ -692,8 +694,8 @@
 					<h4>Заказать дизайн портрета</h4>
 					<div class=file_upload>
 						<button type=button>Загрузить фотографию</button>
-						<div>Файл не выбран</div>
-						<input type=file name=upload>
+						<div>Файл не выбран. Загрузите или перетащите файл сюда</div>
+						<input type=file name=upload accept=".jpg, .jpeg, .png">
 					</div>
 					<div class=main-form>
 						<div class=form>
@@ -708,6 +710,11 @@
 			</div>
 		</div>
 	</div>
+	<a href="#up" class="pageup">
+		<svg class="up" viewBox="0 0 26 26" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+			<path fill-rule="evenodd" clip-rule="evenodd" d="M26 0H0V26H26V0ZM4.6593 17.7519L13.1233 10.33L21.5873 17.7519L22.9059 16.2481L13.7826 8.24813L13.1233 7.67L12.464 8.24813L3.3407 16.2481L4.6593 17.7519Z" fill="white"/>
+		</svg>
+	</a>
 	<script src="script.js"></script>
 </body>
 </html>
